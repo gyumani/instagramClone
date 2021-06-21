@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="User">
+    <select id="existUsername" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) FROM user WHERE username=#{username}
+    </select>
+    <insert id="insertUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(
+            username,
+            password,
+            email,
+            firstname,
+            lastname
+        ) VALUES(
+            #{username},
+            #{password},
+            #{email},
+            #{firstName},
+            #{lastName}
+        )
+    </insert>
+    <insert id="insertProfile" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.ProfileEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO profile(
+            profileTitle,
+            profileContent
+        )values(
+            #{profileTitle},
+            #{profileContent}
+        )
+    </insert>
+</mapper>
