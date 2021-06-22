@@ -14,7 +14,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     // 회원가입 페이지
     @GetMapping("/auth/joinForm")
     public String joinForm(){ return "user/joinForm"; }
