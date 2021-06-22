@@ -26,4 +26,10 @@
             now()
         )
     </insert>
+    <update id="updateUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
+        UPDATE user SET username=#{username},password=#{password},email=#{email},firstName=#{firstName},lastName=#{lastName} WHERE id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
 </mapper>

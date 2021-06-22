@@ -16,10 +16,11 @@
         </div>
         <h4 class="edit-profile__username">serranoarevalo</h4>
     </header>
-    <form action="" class="edit-profile__form">
+    <form class="edit-profile__form">
+        <input type="hidden" id="id" value="${principal.user.id}"/>
         <div class="form__row">
             <label for="full-name" class="form__label">Name:</label>
-            <input id="full-name" type="text" class="form__input" />
+            <input id="username" type="text" class="form__input" />
         </div>
         <div class="form__row">
             <label for="user-name" class="form__label">Username:</label>
