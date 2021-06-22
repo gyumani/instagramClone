@@ -16,8 +16,10 @@
         <div class="profile__column">
             <div class="profile__title">
                 <h3 class="profile__username">serranoarevalo</h3>
-                <a href="/feed/editProfile">Edit profile</a>
-                <i class="fa fa-cog fa-lg"></i>
+                <c:if test="${profile.userEntity.id==principal.userEntity.id}">
+                    <a href="/feed/editProfile">Edit profile</a>
+                    <a href="/updateUserForm">Edit user</a>
+                </c:if>
             </div>
             <ul class="profile__stats">
                 <li class="profile__stat">

@@ -11,6 +11,6 @@ public class FeedController {
     }
     @GetMapping("/feed/editProfile")
     public String editProfile(){
-        return "/user/updateUserForm";
+        return "/board/editProfile";
     }
 }

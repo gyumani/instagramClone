@@ -28,5 +28,8 @@ public class UserController {
         return "user/loginForm";
     }
 
+    @GetMapping("/updateUserForm")
+    public String updateForm() {return  "user/updateUserForm"; }
+
 
 }
