@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class PrincipalDetailService implements UserDetailsService {
     @Autowired
@@ -15,7 +16,10 @@ public class PrincipalDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity pricipal=commonDao.getData("User.existUsername",username);
-        return new PrincipalDetail(pricipal);
+        UserEntity principal = null;
+        if(commonDao.getData("User.existUsername",username)){
+            principal=commonDao.getData("User.selectUser",username);
+        }
+        return new PrincipalDetail(principal);
     }
 }

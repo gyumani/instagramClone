@@ -4,7 +4,7 @@
     <select id="existUsername" parameterType="String" resultType="boolean">
         SELECT COUNT(*) FROM user WHERE username=#{username}
     </select>
-    <select id="selectUser" parameterType="String" resultType="boolean">
+    <select id="selectUser" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
         SELECT * FROM user WHERE username=#{username}
     </select>
     <insert id="insertUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" useGeneratedKeys="true" keyProperty="id">
