@@ -19,34 +19,28 @@
 <body>
 <main id="login">
     <div class="login__column">
-        <img src="/images/phoneImage.png" class="login__phone" />
-    </div>
-    <div class="login__column">
         <div class="login__box">
             <img src="/images/loginLogo.png" class="login__logo" />
-            <form action="/auth/loginProc" method="post" class="login__form">
+            <form action="/auth/joinProc" method="post" class="login__form">
                 <input type="text" name="username" placeholder="Username" required />
                 <input type="password" name="password" placeholder="Password" required />
-                <input type="submit" value="Log in" />
+                <br/>
+                <input type="text" name="email" placeholder="email" required />
+                <br/>
+                <input type="text" name="firstName" placeholder="first name" required />
+                <br/>
+                <input type="text" name="lastName" placeholder="last name" required />
+
+                <input type="submit" value="Sign in" />
             </form>
             <span class="login__divider">or</span>
             <a href="#" class="login__link">
                 <i class="fa fa-money"></i>
-                Log in with Facebook
+                Sign in with Facebook
             </a>
             <a href="#" class="login__link login__link--small">Forgot password</a>
         </div>
-        <div class="login__box">
-            <span>Don't have an account?</span> <a href="/auth/joinForm">Sign up</a>
-        </div>
-        <div class="login__box--transparent">
-            <span>Get the app.</span>
-            <div class="login__appstores">
-                <img src="/images/ios.png" class="login__appstore" alt="Apple appstore logo" title="Apple appstore logo" />
-                <img src="/images/android.png" class="login__appstore" alt="Android appstore logo" title="Android appstore logo" />
-            </div>
-        </div>
     </div>
 </main>
-
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>

@@ -12,14 +12,18 @@
             username,
             password,
             email,
-            firstname,
-            lastname
+            firstName,
+            lastName,
+            role,
+            createDate
         ) VALUES(
             #{username},
             #{password},
             #{email},
             #{firstName},
-            #{lastName}
+            #{lastName},
+            #{role},
+            now()
         )
     </insert>
 </mapper>
