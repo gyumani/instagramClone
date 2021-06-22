@@ -9,4 +9,8 @@ public class FeedController {
     public String viewProfile(){
         return "/board/profile";
     }
+    @GetMapping("/feed/editProfile")
+    public String editProfile(){
+        return "/user/updateUserForm";
+    }
 }

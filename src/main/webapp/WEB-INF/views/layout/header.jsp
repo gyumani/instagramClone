@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Feed | Vietgram</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <div class="navigation__column">
         <a href="/">
             <!-- Master branch comment -->
-            <img src="images/logo.png" />
+            <img src="/images/logo.png" />
         </a>
     </div>
     <div class="navigation__column">

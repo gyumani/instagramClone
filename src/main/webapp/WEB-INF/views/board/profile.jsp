@@ -6,50 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile | Vietgram</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-
-<body>
-<nav class="navigation">
-    <div class="navigation__column">
-        <a href="/">
-            <!-- Master branch comment -->
-            <img src="/images/logo.png" />
-        </a>
-    </div>
-    <div class="navigation__column">
-        <i class="fa fa-search"></i>
-        <input type="text" placeholder="Search">
-    </div>
-    <div class="navigation__column">
-        <ul class="navigations__links">
-            <li class="navigation__list-item">
-                <a href="explore.html" class="navigation__link">
-                    <i class="fa fa-compass fa-lg"></i>
-                </a>
-            </li>
-            <li class="navigation__list-item">
-                <a href="/logout" class="navigation__link">
-                    <i class="fa fa-heart-o fa-lg"></i>
-                </a>
-            </li>
-            <li class="navigation__list-item">
-                <a href="/feed/profile" class="navigation__link">
-                    <i class="fa fa-user-o fa-lg"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<%@ include file="../layout/header.jsp"%>
 <main id="profile">
     <header class="profile__header">
         <div class="profile__column">
@@ -58,7 +16,7 @@
         <div class="profile__column">
             <div class="profile__title">
                 <h3 class="profile__username">serranoarevalo</h3>
-                <a href="edit-profile.html">Edit profile</a>
+                <a href="/feed/editProfile">Edit profile</a>
                 <i class="fa fa-cog fa-lg"></i>
             </div>
             <ul class="profile__stats">
