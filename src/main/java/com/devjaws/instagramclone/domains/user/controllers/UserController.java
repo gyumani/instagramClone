@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,10 +55,12 @@ public class UserController {
         return "/";
     }
 
-    @DeleteMapping("/deleteUser")
-    public String deleteUser(UserEntity userEntity){
-        userService.deleteUser(userEntity);
-        return "/";
+    @PostMapping("/deleteUser")
+    public String deleteUser(@RequestParam("id") Integer id, RedirectAttributes rttr){
+        if(userService.deleteUser(id)){
+            rttr.addFlashAttribute("result","success");
+        }
+        return "/user/loginForm";
     }
 
 

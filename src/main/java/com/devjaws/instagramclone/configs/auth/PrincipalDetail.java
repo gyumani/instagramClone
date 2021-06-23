@@ -1,12 +1,19 @@
 package com.devjaws.instagramclone.configs.auth;
 
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class PrincipalDetail implements UserDetails {
     private UserEntity userEntity;
 

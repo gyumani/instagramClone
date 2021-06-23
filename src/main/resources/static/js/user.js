@@ -34,22 +34,19 @@ let index={
             alert(JSON.stringify(error));
         });
     },
-    remove:function(){
+    remove: function(){
+        let id = document.getElementById("id");
+
         $.ajax({
-            type:"DELETE",
-            url:"/deleteUser",
-            data: JSON.stringify(data),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json"
+            type: "DELETE",
+            url: "/deleteUser/"+id,
+            dataType: "json"
         }).done(function(resp){
-            if(resp.status===500){
-                alert("데이터 테스트 수행 실패");
-            }else{
-                alert("데이터 테스트 수행 성공");
-            }
+            alert("삭제가 완료되었습니다.");
+            location.href = "/";
         }).fail(function(error){
             alert(JSON.stringify(error));
         });
-
     }
+
 }

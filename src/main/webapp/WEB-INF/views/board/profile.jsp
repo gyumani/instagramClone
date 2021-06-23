@@ -15,11 +15,9 @@
         </div>
         <div class="profile__column">
             <div class="profile__title">
-                <h3 class="profile__username">serranoarevalo</h3>
-                <c:if test="${profile.userEntity.id==principal.userEntity.id}">
-                    <a href="/feed/editProfile">Edit profile</a>
-                    <a href="/updateUserForm">Edit user</a>
-                </c:if>
+                <h3 class="profile__username">${principal.userEntity.username}</h3>
+                <a href="/feed/editProfile">Edit profile</a>
+                <a href="/updateUserForm">Edit user</a>
             </div>
             <ul class="profile__stats">
                 <li class="profile__stat">

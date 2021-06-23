@@ -39,14 +39,17 @@ public class UserService {
 
     @Transactional
     public void updateUser(UserEntity userEntity){
+        String rawPassword= userEntity.getPassword();
+        String encPassword=encoder.encode(rawPassword);
+        userEntity.setPassword(encPassword);
         logger.info("====>{}",new Gson().toJson(userEntity));
         update(userEntity);
 
     }
 
     @Transactional
-    public void deleteUser(@AuthenticationPrincipal UserEntity user){
-        commonDao.deleteData("User.deleteUser", user);
+    public boolean deleteUser(Integer id){
+        return commonDao.deleteData("User.deleteUser", id)==1;
     }
 
     public void insert(UserEntity user) {
