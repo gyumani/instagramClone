@@ -14,45 +14,34 @@
         <div class="edit-profile__avatar-container">
             <img src="/images/avatar.jpg" class="edit-profile__avatar" />
         </div>
-        <h4 class="edit-profile__username">serranoarevalo</h4>
+        <h4 class="edit-profile__username">username</h4>
     </header>
-    <form class="edit-profile__form">
-        <input type="hidden" id="id" value="${principal.user.id}"/>
+    <form action="/updateUserProc" method="post" class="edit-profile__form">
+        <input type="hidden" id="id" value="<c:out value="${user.id}"/> "/>
         <div class="form__row">
-            <label for="full-name" class="form__label">Name:</label>
-            <input id="username" type="text" class="form__input" />
+            <label for="username" class="form__label">Username:</label>
+            <input id="username" name="username" value="<c:out value="${user.username}"/>" type="text" class="form__input" />
         </div>
         <div class="form__row">
-            <label for="user-name" class="form__label">Username:</label>
-            <input id="user-name" type="text" class="form__input" />
+            <label for="password" class="form__label">Password:</label>
+            <input id="password" name="password" type="password" class="form__input" />
         </div>
         <div class="form__row">
-            <label for="website" class="form__label">Website:</label>
-            <input id="website" type="url" class="form__input" />
+            <label for="email" class="form__label">Email :</label>
+            <input id="email" name="email" type="email" class="form__input" />
         </div>
         <div class="form__row">
-            <label for="bio" class="form__label">Bio:</label>
-            <textarea id="bio"></textarea>
+            <label for="firstName" class="form__label">First Name:</label>
+            <input id="firstName" name="firstName" type="text" class="form__input" />
         </div>
         <div class="form__row">
-            <label for="email" class="form__label">Email:</label>
-            <input id="email" type="email" class="form__input" />
-        </div>
-        <div class="form__row">
-            <label for="phone" class="form__label">Phone Number:</label>
-            <input id="phone" type="tel" class="form__input" />
-        </div>
-        <div class="form__row">
-            <label for="gender" class="form__label">Gender:</label>
-            <select id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="cant">Can't remember</option>
-            </select>
+            <label for="lastName" class="form__label">Last Naem :</label>
+            <input id="lastName" name="lastName" type="text" class="form__input" />
         </div>
         <input type="submit" value="Submit">
     </form>
+    <button id="btn-delete">delete</button>
 </div>
 </main>
-
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>

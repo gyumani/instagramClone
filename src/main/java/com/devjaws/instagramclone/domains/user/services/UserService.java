@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Service
@@ -34,7 +36,21 @@ public class UserService {
     }
 
 
+
+    @Transactional
+    public void updateUser(UserEntity userEntity){
+        logger.info("====>{}",new Gson().toJson(userEntity));
+        update(userEntity);
+
+    }
+
+    @Transactional
+    public void deleteUser(@AuthenticationPrincipal UserEntity user){
+        commonDao.deleteData("User.deleteUser", user);
+    }
+
     public void insert(UserEntity user) {
         commonDao.insertData("User.insertUser", user);
     }
+    public void update(UserEntity user) {commonDao.updateData("User.updateUser", user);}
 }
