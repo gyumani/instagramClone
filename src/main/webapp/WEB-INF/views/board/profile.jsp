@@ -32,10 +32,12 @@
             </ul>
             <p class="profile__bio">
                     <span class="profile__full-name">
-                        Nicolás Serrano Arévalo
-                    </span> Doing whatever and eating Pho Lorem ipsum dolor sit amet consectetur, adipisicing
+                        ${principal.userEntity.firstName}&nbsp;${principal.userEntity.lastName}&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                <br/> <br/> Doing whatever and eating Pho Lorem ipsum dolor sit amet consectetur, adipisicing
                 elit. Ducimus suscipit praesentium eveniet quibusdam ipsam omnis fugit. Tempore voluptates ratione recusandae
                 natus illo perspiciatis suscipit, odio consequuntur quasi obcaecati minus! Omnis.
+                <br/><br/>
                 <a href="#">serranoarevalo.com</a>
             </p>
         </div>
