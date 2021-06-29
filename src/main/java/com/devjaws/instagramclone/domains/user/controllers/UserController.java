@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private CommonDao commonDao;
+
 
     public boolean findById(String username) { return commonDao.getData("User.existUsername",username); }
 

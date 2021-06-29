@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PrincipalDetailService implements UserDetailsService {
+
     @Autowired
     private CommonDao commonDao;
 

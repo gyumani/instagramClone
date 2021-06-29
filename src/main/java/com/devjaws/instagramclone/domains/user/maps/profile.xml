@@ -3,11 +3,15 @@
 <mapper namespace="User">
     <insert id="insertProfile" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.ProfileEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO profile(
-            profileTitle,
-            profileContent
+            bio,
+            picture,
+            website,
+            user_id
         )values(
-            #{profileTitle},
-            #{profileContent}
+            #{bio},
+            #{picture},
+            #{website},
+            #{UserEntity.id}
         )
     </insert>
 </mapper>

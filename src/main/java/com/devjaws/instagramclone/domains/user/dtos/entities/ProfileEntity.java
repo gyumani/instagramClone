@@ -11,17 +11,18 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class ProfileEntity {
-    private Integer userId;
     private Integer id;
-    private String profileTitle;
-    private String profileContent;
-    private LocalDate createDate;
-    private LocalDate updateDate;
-    private Integer fileId;
+    private String bio;
+    private String picture;
+    private String website;
+    private Integer user_id;
 
     @Builder
-    public ProfileEntity(String profileTitle, String profileContent) {
-        this.profileTitle = profileTitle;
-        this.profileContent = profileContent;
+    public ProfileEntity(Integer id, String bio, String picture, String website, Integer user_id) {
+        this.id = id;
+        this.bio = bio;
+        this.picture = picture;
+        this.website = website;
+        this.user_id = user_id;
     }
 }
