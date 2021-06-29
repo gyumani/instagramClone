@@ -16,15 +16,7 @@
         </div>
         <h4 class="edit-profile__username">${principal.userEntity.username}</h4>
     </header>
-    <form action="" class="edit-profile__form">
-        <div class="form__row">
-            <label for="website" class="form__label">Website:</label>
-            <input id="website" name="website" type="url" class="form__input" />
-        </div>
-        <div class="form__row">
-            <label for="bio" class="form__label">Bio:</label>
-            <textarea id="bio" name="bio"></textarea>
-        </div>
+    <form action="/test/uploadPropicture" method="post" class="edit-profile__form" enctype="multipart/form-data">
         <div class="form__row">
             <label for="file" class="form__label">Picture:</label>
             <input id="file" name="file" type="file" class="form__input" />
