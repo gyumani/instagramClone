@@ -56,4 +56,5 @@ public class UserService {
         commonDao.insertData("User.insertUser", user);
     }
     public void update(UserEntity user) {commonDao.updateData("User.updateUser", user);}
+    public boolean existUsername(String username){ return commonDao.getData("User.exisetUsername",username);}
 }

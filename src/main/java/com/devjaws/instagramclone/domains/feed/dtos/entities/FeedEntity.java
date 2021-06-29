@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class FeedEntity {
 
-    private Integer fileId;
     private Integer id;
     private Integer userId;
+    private String picture;
     private String content;
     private Integer likeCount;
     private LocalDate createDate;

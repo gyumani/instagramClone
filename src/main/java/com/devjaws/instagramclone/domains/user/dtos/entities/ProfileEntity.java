@@ -15,14 +15,14 @@ public class ProfileEntity {
     private String bio;
     private String picture;
     private String website;
-    private Integer user_id;
+    private String user_name;
 
     @Builder
-    public ProfileEntity(Integer id, String bio, String picture, String website, Integer user_id) {
+    public ProfileEntity(Integer id, String bio, String picture, String website, String user_name) {
         this.id = id;
         this.bio = bio;
         this.picture = picture;
         this.website = website;
-        this.user_id = user_id;
+        this.user_name = user_name;
     }
 }

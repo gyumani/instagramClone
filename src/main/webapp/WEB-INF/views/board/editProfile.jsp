@@ -16,7 +16,7 @@
         </div>
         <h4 class="edit-profile__username">${principal.userEntity.username}</h4>
     </header>
-    <form action="" class="edit-profile__form">
+    <form action="/Profile/insert" METHOD="post" class="edit-profile__form" enctype="multipart/form-data">
         <div class="form__row">
             <label for="website" class="form__label">Website:</label>
             <input id="website" name="website" type="url" class="form__input" />

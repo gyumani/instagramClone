@@ -13,7 +13,7 @@
     <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="navigation__list-item">
-                <a href="/feed/profile" class="navigation__link">
+                <a href="/board/profile" class="navigation__link">
                     <i class="fa fa-user-o fa-lg"></i>
                 </a>
             </li>
