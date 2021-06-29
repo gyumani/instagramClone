@@ -1,19 +1,15 @@
 package com.devjaws.instagramclone.domains.user.services;
 
 import com.devjaws.instagramclone.configs.database.dao.ICommonDao;
-import com.devjaws.instagramclone.domains.user.dtos.entities.ProfileEntity;
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
 import com.devjaws.instagramclone.domains.user.role.RoleType;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Service
@@ -57,4 +53,20 @@ public class UserService {
     }
     public void update(UserEntity user) {commonDao.updateData("User.updateUser", user);}
     public boolean existUsername(String username){ return commonDao.getData("User.exisetUsername",username);}
+
+
+    @Transactional
+    public void insertProfile(UserEntity userEntity){
+        commonDao.insertData("User.insertProfile", userEntity);
+        logger.info("----------------------{}: "+userEntity );
+    }
+    @Transactional
+    public void updateProfile(UserEntity userEntity){
+        commonDao.updateData("User.updateProfile", userEntity);
+    }
+
+    @Transactional
+    public UserEntity viewProfile (Integer id){
+        return (UserEntity) commonDao.getData("User.viewProfile", id);
+    }
 }

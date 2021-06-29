@@ -1,10 +1,14 @@
-CREATE TABLE user (
-    `id`    INTEGER(11)     NOT NULL    PRIMARY KEY     AUTO_INCREMENT,
-    `username`      VARCHAR(100)        NOT NULL,
-    `password`      VARCHAR (100)       NOT NULL,
-    `email`         VARCHAR(100)        NOT NULL,
-    `firstName`     VARCHAR (50)       NOT NULL,
-    `lastName`      VARCHAR (40)       NOT NULL,
-    `role`      VARCHAR (30)        NOT NULL,
-    `createDate`    DATE    NOT NULL
-)
+
+create table user(
+                     id integer not null auto_increment primary key,
+                     username varchar(100) not null,
+                     password varchar(100) not null,
+                     email varchar(100) not null,
+                     firstName varchar(40) not null,
+                     lastName varchar(40) not null,
+                     role varchar(20) not null,
+                     bio longtext,
+                     picture varchar(100),
+                     website varchar(100),
+                     createDate date not null
+); 

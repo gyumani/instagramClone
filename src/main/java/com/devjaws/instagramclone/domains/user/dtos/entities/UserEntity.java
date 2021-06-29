@@ -20,14 +20,21 @@ public class UserEntity {
     private String firstName; //성
     private String lastName; //이름
     private RoleType role; //권한
+    private String bio;
+    private String picture;
+    private String website;
     private LocalDate createDate; //가입일자(자동생성)
 
     @Builder
-    public UserEntity(String username, String password, String email, String firstName, String lastName) {
+    public UserEntity(String username, String password, String email, String firstName, String lastName, RoleType role, String bio, String picture, String website) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
+        this.bio = bio;
+        this.picture = picture;
+        this.website = website;
     }
 }

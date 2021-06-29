@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="navigation__list-item">
-                <a href="/board/profile" class="navigation__link">
+                <a href="/profile" class="navigation__link">
                     <i class="fa fa-user-o fa-lg"></i>
                 </a>
             </li>
