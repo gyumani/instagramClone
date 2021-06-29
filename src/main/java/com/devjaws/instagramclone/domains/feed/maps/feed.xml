@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="Feed">
+    <insert id="insertFeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO feed(
+            username,
+            picture,
+            content,
+            createDate,
+            updateDate
+        ) VALUES(
+            #{username},
+            #{picture},
+            #{content},
+            now(),
+            now()
+        )
+    </insert>
+    <update id="updatefeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
+        UPDATE feed SET picture=#{picture},content=#{content},updateDate=now() WHERE id=#{id}
+    </update>
+    <select id="selectAllByUsername" parameterType="String" >
+        SELECT
+            *
+        FROM
+            feed as f
+        INNER JOIN
+            user as u
+        ON f.username=u.username
+        WHERE
+            username=u.username
+    </select>
+    <delete id="deletePost">
+        DELETE * FROM feed WHERE id=#{id}
+    </delete>
+</mapper>

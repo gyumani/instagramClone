@@ -23,17 +23,19 @@ public class FileUploder {
             e.printStackTrace();
         }
     }
-    public void uploadPost(MultipartFile[] file, Model model) throws Exception{
+    public static void uploadPost(MultipartFile file,String filename, String username) throws Exception{
         String path= Const.PATH_POSTPICTURE;
-        for(MultipartFile multipartFile: file){
-            UUID uuid=UUID.randomUUID();
-            String filename="Post_"+uuid.toString().replaceAll("-","")+multipartFile.getOriginalFilename();
-            File savefile=new File(path, filename);
-            try{
-                multipartFile.transferTo(savefile);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+        File uploadPath=new File(path, username);
+        if(uploadPath.exists()==false){
+            uploadPath.mkdirs();
+        }
+        filename=file.getOriginalFilename();
+        filename.substring(filename.lastIndexOf("\\")+1);
+        File savefile=new File(uploadPath, filename);
+        try{
+            file.transferTo(savefile);
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

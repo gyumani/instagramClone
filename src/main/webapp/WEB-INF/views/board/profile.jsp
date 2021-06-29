@@ -39,6 +39,7 @@
             </p>
         </div>
     </header>
+    <a href="/feed/insertForm">포스트 업로드</a>
     <section class="profile__photos">
         <div class="profile__photo">
             <img src="/images/feedPhoto.jpg" />

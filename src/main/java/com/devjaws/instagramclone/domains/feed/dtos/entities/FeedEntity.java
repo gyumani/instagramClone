@@ -13,14 +13,15 @@ import java.time.LocalDate;
 public class FeedEntity {
 
     private Integer id;
-    private Integer userId;
+    private String username;
     private String picture;
     private String content;
-    private Integer likeCount;
     private LocalDate createDate;
     private LocalDate updateDate;
 
-    public FeedEntity(String content) {
+    @Builder
+    public FeedEntity(String picture, String content) {
+        this.picture = picture;
         this.content = content;
     }
 }

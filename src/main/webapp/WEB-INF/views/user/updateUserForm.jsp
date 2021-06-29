@@ -12,7 +12,7 @@
 <div class="edit-profile__container">
     <header class="edit-profile__header">
         <div class="edit-profile__avatar-container">
-            <img src="/images/avatar.jpg" class="edit-profile__avatar" />
+            <img src="/images/ProfilePicture/${principal.userEntity.username}/${principal.userEntity.picture}" class="edit-profile__avatar" />
         </div>
         <h4 class="edit-profile__username">${principal.userEntity.username}</h4>
     </header>

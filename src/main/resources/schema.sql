@@ -11,4 +11,13 @@ create table user(
                      picture varchar(100),
                      website varchar(100),
                      createDate date not null
-); 
+);
+
+create table feed(
+                     id integer not null auto_increment primary key,
+                     username varchar(100) not null,
+                     picture varchar(100) not null,
+                     content longtext,
+                     createDate date not null,
+                     updateDate date not null
+);
