@@ -1,5 +1,8 @@
 package com.devjaws.instagramclone.domains.user.dtos.entities;
 
+import com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity;
+import com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity;
+import com.devjaws.instagramclone.domains.follower.dtos.entities.FollowerEntity;
 import com.devjaws.instagramclone.domains.user.role.RoleType;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +11,7 @@ import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +28,9 @@ public class UserEntity {
     private String picture;
     private String website;
     private LocalDate createDate; //가입일자(자동생성)
+    private List<FeedEntity> feedEntityList;
+    private List<CommentEntity> commentEntityList;
+    private List<FollowerEntity> followerEntityList;
 
     @Builder
     public UserEntity(String username, String password, String email, String firstName, String lastName, RoleType role, String bio, String picture, String website) {
