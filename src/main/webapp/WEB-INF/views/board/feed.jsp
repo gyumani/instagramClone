@@ -45,7 +45,7 @@
                 <header class="photo__header">
                     <img  style="width:40px; height:40px; margin-right:10px;" src="/images/ProfilePicture/${main.postUsername}/${main.profilePicture}" />
                     <div class="photo__user-info">
-                        <span class="photo__author">${main.postUsername}</span>
+                        <a  href="/feed/profile/${main.postUsername}"><span class="photo__author" >${main.postUsername}</span></a>
                     </div>
                 </header>
                 <img style="width:300px; height:300px; margin-left:150px;" src="/images/PostPicture/${main.postUsername}/${main.postPicture}"/>

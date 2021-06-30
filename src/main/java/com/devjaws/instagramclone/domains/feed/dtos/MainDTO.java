@@ -21,16 +21,25 @@ public class MainDTO {
     private String postPicture;
     @NotBlank
     private String profilePicture;
+    @NotBlank
+    private String firstName;
+    @NotBlank
+    private String lastName;
+    private String bio;
+    private String website;
     private String postContent;
     private String commentContent;
 
     @Builder
-
-    public MainDTO(String postUsername, String commentUsername, String postPicture, String profilePicture, String postContent, String commentContent) {
+    public MainDTO(String postUsername, String commentUsername, String postPicture, String profilePicture, String firstName, String lastName, String bio, String website, String postContent, String commentContent) {
         this.postUsername = postUsername;
         this.commentUsername = commentUsername;
         this.postPicture = postPicture;
         this.profilePicture = profilePicture;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.website = website;
         this.postContent = postContent;
         this.commentContent = commentContent;
     }

@@ -19,17 +19,32 @@
     <update id="updatefeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
         UPDATE feed SET picture=#{picture},content=#{content},updateDate=now() WHERE id=#{id}
     </update>
-    <select id="getpp" parameterType="String" resultType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
-        SELECT
-            f.id, f.username, f.picture, f.content, u.picture as user_picture, f.createDate, f.updateDate
-        FROM
-            feed as f
-        JOIN
+    <select id="getpp" parameterType="String" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
+        select
+            p.id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName,
+            u.bio as bio,
+            u.website as website,
+            c.username as commentUsername,
+            c.content as commentContent
+        from
+            feed as p
+        left join
             user as u
-        ON f.username=u.username
-        WHERE
-            f.username=#{username}
-        ORDER BY f.id DESC
+        on
+            p.username=u.username
+        left join
+            comment as c
+        on
+            p.id=c.post_id
+        where
+            p.username=#{username}
+        order by p.id desc
     </select>
     <select id="main" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
         select
@@ -38,6 +53,10 @@
             p.picture as postPicture,
             p.content as postContent,
             u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName,
+            u.bio as bio,
+            u.website as website,
             c.username as commentUsername,
             c.content as commentContent
         from

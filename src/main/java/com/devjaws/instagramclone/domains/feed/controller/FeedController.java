@@ -46,9 +46,9 @@ public class FeedController {
         return "board/feed";
     }
 
-    @GetMapping("/feed/profile")
-    public String getpp (Principal principal, Model model) throws Exception{
-        List<FeedEntity> getpp= feedService.getpp(principal.getName());
+    @GetMapping("/feed/profile/{username}")
+    public String getpp (@PathVariable String username, Model model) throws Exception{
+        List<FeedEntity> getpp= feedService.getpp(username);
         model.addAttribute("getpp", getpp);
         return "board/profile";
     }
