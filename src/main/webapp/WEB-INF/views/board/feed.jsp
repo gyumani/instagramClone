@@ -12,17 +12,18 @@
     <script type="text/javascript">
         $(document).ready(function (){
             let comment={
-                post_id: $('#post_id').val(),
+                post_id: $("#post_id").val(),
                 username: $("#username").val(),
-                content: $('#content').val(),
+                content: $("#content").val()
 
             };
             $("#btn-comment").on("click",()=>{
                 console.log('작동');
+                console.log(comment);
                 $.ajax({
                     type:"POST",
                     url:"/test/insert",
-                    data:JSON.stringify(data),
+                    data:JSON.stringify(comment),
                     contentType:"application/json; charset=utf-8",
                     dataType:"json"
                 }).done(function(resp){
