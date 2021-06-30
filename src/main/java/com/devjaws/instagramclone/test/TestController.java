@@ -1,9 +1,12 @@
 package com.devjaws.instagramclone.test;
 
 import com.devjaws.instagramclone.configs.Const;
+import com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity;
+import com.devjaws.instagramclone.domains.comment.service.CommentService;
 import com.devjaws.instagramclone.domains.user.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,10 @@ import java.util.UUID;
 
 @Controller
 public class TestController {
+
+    @Autowired
+    private CommentService commentService;
+
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
     @GetMapping("/test/index")
     public String testIndex(){return "index";}
@@ -46,6 +53,15 @@ public class TestController {
         return "board/testup";
     }
 
+    @GetMapping("/test/comment")
+    public String goCommentTest(){
+        return "test/comment";
+    }
+    @PostMapping("/test/insert")
+    public String insertComment(CommentEntity commentEntity){
+        commentService.insertComment(commentEntity);
+        return "test/comment";
+    };
     private boolean checkImageType(File file){
         try{
             String contentType= Files.probeContentType(file.toPath());

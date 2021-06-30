@@ -19,16 +19,38 @@
     <update id="updatefeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
         UPDATE feed SET picture=#{picture},content=#{content},updateDate=now() WHERE id=#{id}
     </update>
-    <select id="selectAllByUsername" parameterType="String" >
+    <select id="getpp" parameterType="String" resultType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
         SELECT
-            *
+            f.id, f.username, f.picture, f.content, u.picture as user_picture, f.createDate, f.updateDate
         FROM
             feed as f
-        INNER JOIN
+        JOIN
             user as u
         ON f.username=u.username
         WHERE
-            username=u.username
+            f.username=#{username}
+        ORDER BY f.id DESC
+    </select>
+    <select id="main" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
+        select
+            p.id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            c.username as commentUsername,
+            c.content as commentContent
+        from
+            feed as p
+        left join
+            user as u
+        on
+            p.username=u.username
+        left join
+            comment as c
+        on
+            p.id=c.post_id
+        order by p.id desc
     </select>
     <delete id="deletePost">
         DELETE * FROM feed WHERE id=#{id}

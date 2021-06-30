@@ -20,11 +20,11 @@
         <input type="hidden" name="id" value="${principal.userEntity.id}">
         <div class="form__row">
             <label for="website" class="form__label">Website:</label>
-            <input id="website" name="website" type="url" class="form__input" />
+            <input id="website" name="website" value="${principal.userEntity.website}" type="url" class="form__input" />
         </div>
         <div class="form__row">
             <label for="bio" class="form__label">Bio:</label>
-            <textarea id="bio" name="bio"></textarea>
+            <textarea id="bio" value="${principal.userEntity.bio}" name="bio"></textarea>
         </div>
         <div class="form__row">
             <label for="file" class="form__label">Picture:</label>

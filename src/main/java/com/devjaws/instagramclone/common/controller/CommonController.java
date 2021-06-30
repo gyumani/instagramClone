@@ -8,8 +8,4 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class CommonController {
-    @GetMapping("/")
-    public String home(){
-        return "/board/feed";
-    }
 }

@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.Session;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -76,7 +78,6 @@ public class UserController {
 
     @PostMapping("/Profile/insert")
     public String insertProfile(Principal principal, UserEntity userEntity, @RequestParam("file") MultipartFile file) throws Exception {
-
         String filetxt= StringUtils.cleanPath(file.getOriginalFilename());
         userEntity.setPicture(filetxt);
         userService.updateProfile(userEntity);
@@ -84,9 +85,14 @@ public class UserController {
         return "board/profile";
     }
 
-    @GetMapping("/profile")
-    public String profile() throws Exception{
+    @GetMapping("/profile/{id}")
+    public String profile(){
         return "board/profile";
+    }
+
+    @GetMapping("/feed/editProfile")
+    public String editProfile(){
+        return "/board/editProfile";
     }
 
 

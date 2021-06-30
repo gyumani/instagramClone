@@ -33,19 +33,11 @@
         DELETE FROM user WHERE id=#{id}
     </delete>
 
-    <insert id="insertProfile" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user(
-        bio,
-        picture,
-        website
-        )values(
-        #{bio},
-        #{picture},
-        #{website}
-        )
-    </insert>
-    <select id="viewProfile" parameterType="String" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" >
+    <select id="selectProfile" parameterType="Integer" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" >
         SELECT
+            id,
+            username,
+            email,
             picture,
             bio,
             website,
@@ -55,7 +47,7 @@
         FROM
             user
         WHERE
-            username=#{username}
+            id=#{id}
     </select>
     <update id="updateProfile" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
         UPDATE user SET bio=#{bio},picture=#{picture},website=#{website} WHERE id=#{id}

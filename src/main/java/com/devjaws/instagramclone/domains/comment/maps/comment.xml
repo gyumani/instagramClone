@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="Comment">
+    <insert id="insertComment" parameterType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment(
+            post_id,
+            username,
+            content,
+            createDate
+        ) VALUES(
+            #{post_id},
+            #{username},
+            #{content},
+            now()
+        )
+    </insert>
+    <select id="readComment" resultType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity">
+        SELECT
+            *
+        FROM
+            comment
+        WHERE
+            id=#{id}
+    </select>
+    <delete id="delete">
+        delete from comment whrere id=#{id}
+    </delete>
+    <select id="getListPost" resultType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity">
+        select
+            id, post_id, username, content, createDate
+        from
+            comment
+        where
+            post_id=#{post_id}
+        order by
+            id desc
+    </select>
+</mapper>

@@ -1,3 +1,11 @@
+create database if not exists insta;
+use insta;
+
+drop table profile;
+drop table if exists user;
+drop table if exists feed;
+drop table if exists comment
+
 
 create table user(
                      id integer not null auto_increment primary key,
@@ -20,4 +28,13 @@ create table feed(
                      content longtext,
                      createDate date not null,
                      updateDate date not null
+);
+
+create table comment(
+                    id integer not null auto_increment primary key,
+                    post_id integer not null,
+                    username varchar (100) not null,
+                    content varchar (100) not null,
+                    createDate date not null
+                    foreign key post_id references feed(id)
 );

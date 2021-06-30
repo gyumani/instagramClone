@@ -21,6 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>instagram</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
@@ -49,7 +50,7 @@
                 </a>
             </li>
             <li class="navigation__list-item">
-                <a href="/profile" class="navigation__link">
+                <a href="/profile/${principal.userEntity.id}" class="navigation__link">
                     <i class="fa fa-user-o fa-lg"></i>
                 </a>
             </li>

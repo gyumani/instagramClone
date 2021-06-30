@@ -11,11 +11,11 @@
 <main id="profile">
     <header class="profile__header">
         <div class="profile__column">
-            <img src="/images/ProfilePicture/${principal.userEntity.username}/${principal.userEntity.picture}" />
+            <img  style="width:120px; height:120px;" src="/images/ProfilePicture/${principal.userEntity.username}/${principal.userEntity.picture}" />
         </div>
         <div class="profile__column">
             <div class="profile__title">
-                <h3 class="profile__username">${principal.userEntity.username}</h3>
+                <h3 class="profile__username">${principal.userEntity.username} </h3>
                 <a href="/feed/editProfile">Edit profile</a>
                 <a href="/updateUserForm">Edit user</a>
             </div>
@@ -35,64 +35,38 @@
                     ${principal.userEntity.firstName}&nbsp;${principal.userEntity.lastName}&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
                 <br/> <br/>${principal.userEntity.bio}<br/><br/>
-                <a href="#">${principal.userEntity.website}</a>
+                <a href="${principal.userEntity.website}">${principal.userEntity.website}</a>
             </p>
         </div>
+
     </header>
-    <a href="/feed/insertForm">포스트 업로드</a>
+
+    <style>
+        .post__upload{
+            width:15%; height: 30px;
+            margin-bottom: 30px;
+            text-align: center; line-height: 30px;
+            font-size:20px; font-weight:bold; color:#fff;
+            text-decoration: none; background:#3897f0;
+        }
+    </style>
+    <a href="/feed/insertForm" class="post__upload">포스트 업로드</a>
     <section class="profile__photos">
-        <div class="profile__photo">
-            <img src="/images/feedPhoto.jpg" />
-            <div class="profile__photo-overlay">
+        <c:forEach items="${getpp}" var="feed" varStatus="status" step="1" begin="0">
+            <div class="profile__photo">
+                <img src="/images/PostPicture/${feed.username}/${feed.picture}" />
+                <div class="profile__photo-overlay">
                     <span class="overlay__item">
                         <i class="fa fa-heart"></i>
                         486
                     </span>
-                <span class="overlay__item">
+                    <span class="overlay__item">
                         <i class="fa fa-comment"></i>
                         344
                     </span>
+                </div>
             </div>
-        </div>
-        <div class="profile__photo">
-            <img src="/images/feedPhoto.jpg" />
-            <div class="profile__photo-overlay">
-                    <span class="overlay__item">
-                            <i class="fa fa-heart"></i>
-                            486
-                        </span>
-                <span class="overlay__item">
-                            <i class="fa fa-comment"></i>
-                            344
-                        </span>
-            </div>
-        </div>
-        <div class="profile__photo">
-            <img src="/images/feedPhoto.jpg" />
-            <div class="profile__photo-overlay">
-                    <span class="overlay__item">
-                                <i class="fa fa-heart"></i>
-                                486
-                            </span>
-                <span class="overlay__item">
-                                <i class="fa fa-comment"></i>
-                                344
-                            </span>
-            </div>
-        </div>
-        <div class="profile__photo">
-            <img src="/images/feedPhoto.jpg" />
-            <div class="profile__photo-overlay">
-                    <span class="overlay__item">
-                                    <i class="fa fa-heart"></i>
-                                    486
-                                </span>
-                <span class="overlay__item">
-                                    <i class="fa fa-comment"></i>
-                                    344
-                                </span>
-            </div>
-        </div>
+        </c:forEach>
     </section>
 </main>
 <%@ include file="../layout/footer.jsp"%>

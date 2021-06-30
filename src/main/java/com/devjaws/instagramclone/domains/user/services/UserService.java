@@ -1,15 +1,22 @@
 package com.devjaws.instagramclone.domains.user.services;
 
 import com.devjaws.instagramclone.configs.database.dao.ICommonDao;
+import com.devjaws.instagramclone.domains.user.dao.UserDao;
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
 import com.devjaws.instagramclone.domains.user.role.RoleType;
 import com.google.gson.Gson;
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
 
 
 @Service
@@ -17,6 +24,12 @@ public class UserService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private ICommonDao commonDao;
+
+    @Autowired(required = false)
+    private UserDao userDao;
+
+    @Autowired
+    private SqlSession sqlSession;
 
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -30,8 +43,6 @@ public class UserService {
         logger.info("====>{}", new Gson().toJson(userEntity));
         insert(userEntity);
     }
-
-
 
     @Transactional
     public void updateUser(UserEntity userEntity){
@@ -56,17 +67,17 @@ public class UserService {
 
 
     @Transactional
-    public void insertProfile(UserEntity userEntity){
-        commonDao.insertData("User.insertProfile", userEntity);
-        logger.info("----------------------{}: "+userEntity );
-    }
-    @Transactional
     public void updateProfile(UserEntity userEntity){
         commonDao.updateData("User.updateProfile", userEntity);
     }
 
     @Transactional
-    public UserEntity viewProfile (Integer id){
-        return (UserEntity) commonDao.getData("User.viewProfile", id);
+    public UserEntity searchUser(Integer id){
+        try{
+            userDao=sqlSession.getMapper(UserDao.class);
+            return userDao.selectProfile(id);
+        }catch(Exception e){
+            return null;
+        }
     }
 }

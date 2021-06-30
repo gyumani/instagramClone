@@ -1,6 +1,7 @@
 package com.devjaws.instagramclone.configs.database.dao;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
