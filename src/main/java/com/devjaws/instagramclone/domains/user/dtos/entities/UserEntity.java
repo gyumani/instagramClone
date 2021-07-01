@@ -1,17 +1,12 @@
 package com.devjaws.instagramclone.domains.user.dtos.entities;
 
-import com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity;
-import com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity;
-import com.devjaws.instagramclone.domains.follower.dtos.entities.FollowerEntity;
 import com.devjaws.instagramclone.domains.user.role.RoleType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
