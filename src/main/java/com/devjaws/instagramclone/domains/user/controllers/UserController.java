@@ -96,18 +96,23 @@ public class UserController {
         return "/board/editProfile";
     }
 
-    @ModelAttribute("getProfile")
-    public UserEntity getProfile(String username, Model model){
-        UserEntity profile=userService.profile(username);
-        model.addAttribute("profile",profile);
-        return profile;
-    }
+
     @GetMapping("/feed/profile/{username}")
     public String getpp (@PathVariable String username, Model model) throws Exception{
         List<MainDTO> getpp= feedService.getpp(username);
         model.addAttribute("getpp", getpp);
         UserEntity info=userService.profile(username);
         model.addAttribute("info",info);
+
+        return "board/profile";
+    }
+
+
+    @GetMapping("/p/{id}")
+    public String getPostModel (@PathVariable Integer id, Model model) throws Exception{
+        MainDTO post=feedService.getPost(id);
+        model.addAttribute("post",post);
+
         return "board/profile";
     }
 }

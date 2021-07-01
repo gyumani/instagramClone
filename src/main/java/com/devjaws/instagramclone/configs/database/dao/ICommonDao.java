@@ -12,4 +12,5 @@ public interface ICommonDao {
     void updateData(String query, Object model) throws DataAccessException;
     int updateData(String query) throws DataAccessException;
     int deleteData(String query, Object search) throws DataAccessException;
+    Integer getPostId(String query, Integer id) throws DataAccessException;
 }

@@ -10,36 +10,35 @@
 <main id="feed">
 
     <script type="text/javascript">
-        $(document).ready(function (){
+        function onCommentInsert (obj){
+            const data=$(obj).prev();
+
             let comment={
-                post_id: $("#post_id").val(),
+                post_id: data.find('.post_id').val(),
                 username: $("#username").val(),
-                content: $("#content").val()
+                content: data.find('.content').val()
 
             };
-            $("#btn-comment").on("click",()=>{
-                console.log('작동');
-                console.log(comment);
-                $.ajax({
-                    type:"POST",
-                    url:"/test/insert",
-                    data:JSON.stringify(comment),
-                    contentType:"application/json; charset=utf-8",
-                    dataType:"json"
-                }).done(function(resp){
-                    if(resp.status===500){
-                        alert("댓글 실패.");
-                        location.href="/test/comment"
+            console.log(comment);
+            $.ajax({
+                type:"POST",
+                url:"/comments/insert",
+                data:JSON.stringify(comment),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json"
+            }).done(function(resp){
+                if(resp.status===500){
+                    alert("댓글 실패");
+                    history.go(-1);
 
-                    }else{
-                        alert("댓글 성공.");
-                        location.href="/test/comment"
-                    }
-                }).fail(function(error){
-                    alert(JSON.stringify(error));
-                });
+                }else{
+                    alert("댓글 성공");
+                    history.go(-1);
+                }
+            }).fail(function(error){
+                alert(JSON.stringify(error));
             });
-        });
+        }
     </script>
         <c:forEach items="${main}" var="main">
             <div class="photo" >
@@ -48,8 +47,9 @@
                     <div class="photo__user-info">
                         <a style="color:#333; text-decoration: none;" href="/feed/profile/${main.postUsername}"><span class="photo__author" >${main.postUsername}</span></a>
                     </div>
+                    <a class="btn-insert" href="/feed/updateForm/${main.id}"><i class="fa fa-ellipsis-h"></i></a>
                 </header>
-                <img style="width:300px; height:300px; margin-left:150px;" src="/images/PostPicture/${main.postUsername}/${main.postPicture}"/>
+                <img style="width:300px; height:100%; margin-left:150px;" src="/images/PostPicture/${main.postUsername}/${main.postPicture}"/>
                 <div style="text-align: center; margin:10px 20px;">
                     <p>${main.postContent}</p>
                 </div>
@@ -64,16 +64,22 @@
                     </div>
                     <span class="photo__likes">45 likes</span>
                     <ul class="photo__comments">
-                        <li class="photo__comment">
-                            <span class="photo__comment-author">${main.commentUsername}</span>${main.commentContent}
-                        </li>
+                        <c:forEach items="${comment}" var="comment">
+                            <c:if test="${main.id==comment.post_id}">
+                                <li class="photo__comment">
+                                    <span class="photo__comment-author">${comment.username}</span>${comment.content}
+                                </li>
+                            </c:if>
+                        </c:forEach>
                     </ul>
                     <span class="photo__time-ago">2 hours ago</span>
                     <div class="photo__add-comment-container">
-                        <input type="hidden" id="post_id" value="${main.id}">
-                        <input type="hidden" id="username" value="${principal.username}">
-                        <input type id="content" placeholder="Add a comment..."/>
-                        <button id="btn-comment"><i class="fa fa-ellipsis-h"></i></button>
+                        <div>
+                            <input type="hidden" class="post_id" value="${main.id}">
+                            <input type="hidden" id="username" value="${principal.userEntity.username}">
+                            <input type="text" class="content" placeholder="Add a comment..."/>
+                        </div>
+                        <button id="btn-insert" onclick="onCommentInsert(this)"><i class="fa fa-ellipsis-h"></i></button>
                     </div>
                 </div>
             </div>

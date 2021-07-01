@@ -67,7 +67,8 @@
   align-items: center;
 }
 
-.photo__add-comment-container textarea {
+
+.photo__add-comment-container input[type=text] {
   width: 90%;
   border: 0;
   font-size: 14px;
@@ -75,12 +76,18 @@
   height: 20px;
 }
 
-.photo__add-comment-container textarea:focus,
-.photo__add-comment-container textarea:active {
+.photo__add-comment-container input[type=text] :focus,
+.photo__add-comment-container input[type=text] :active {
   outline: none;
 }
 
-.photo__add-comment-container i {
+.photo__add-comment-container button, .btn-insert{
+  background:none;
+  outline:none;
+  border:none;
+}
+
+.photo__add-comment-container button i {
   cursor: pointer;
 }
 

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="Feed">
+    <select id="getPostId" parameterType="Integer" resultType="Integer">
+        select
+            id
+        from
+            post
+        where
+            id=#{id}
+    </select>
     <insert id="insertFeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO feed(
             username,
@@ -16,9 +24,27 @@
             now()
         )
     </insert>
-    <update id="updatefeed" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
+    <update id="updatePost" parameterType="com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity">
         UPDATE feed SET picture=#{picture},content=#{content},updateDate=now() WHERE id=#{id}
     </update>
+    <select id="selectPost" parameterType="Integer" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
+        select
+            p.id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName
+        from
+            feed as p
+        left join
+            user as u
+        on
+            p.username=u.username
+        where
+            p.id=#{id}
+    </select>
     <select id="getpp" parameterType="String" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
         select
             p.id,
@@ -27,52 +53,35 @@
             p.content as postContent,
             u.picture as profilePicture,
             u.firstName as firstName,
-            u.lastName as lastName,
-            u.bio as bio,
-            u.website as website,
-            c.username as commentUsername,
-            c.content as commentContent
+            u.lastName as lastName
         from
             feed as p
         left join
             user as u
         on
             p.username=u.username
-        left join
-            comment as c
-        on
-            p.id=c.post_id
         where
             p.username=#{username}
         order by p.id desc
     </select>
-    <select id="main" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
+    <select id="main" parameterType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO" resultType="com.devjaws.instagramclone.domains.feed.dtos.MainDTO">
         select
-            p.id,
+            p.id as id,
             p.username as postUsername,
             p.picture as postPicture,
             p.content as postContent,
             u.picture as profilePicture,
             u.firstName as firstName,
-            u.lastName as lastName,
-            u.bio as bio,
-            u.website as website,
-            c.username as commentUsername,
-            c.content as commentContent
+            u.lastName as lastName
         from
             feed as p
-        left join
+        join
             user as u
         on
             p.username=u.username
-        left join
-            comment as c
-        on
-            p.id=c.post_id
         order by p.id desc
     </select>
     <delete id="deletePost">
-        DELETE * FROM feed WHERE id=#{id}
+        DELETE * FROM feed WHERE username=#{username}
     </delete>
-    <resultMap id="" type=""
 </mapper>

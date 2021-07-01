@@ -1,11 +1,15 @@
 package com.devjaws.instagramclone.domains.feed.dtos;
 
+import com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.ibatis.type.Alias;
 
 import javax.validation.constraints.NotBlank;
+import javax.xml.stream.events.Comment;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,8 +20,6 @@ public class MainDTO {
     @NotBlank
     private String postUsername;
     @NotBlank
-    private String commentUsername;
-    @NotBlank
     private String postPicture;
     @NotBlank
     private String profilePicture;
@@ -25,22 +27,17 @@ public class MainDTO {
     private String firstName;
     @NotBlank
     private String lastName;
-    private String bio;
-    private String website;
     private String postContent;
-    private String commentContent;
+    private List<CommentEntity> commentEntityList;
 
     @Builder
-    public MainDTO(String postUsername, String commentUsername, String postPicture, String profilePicture, String firstName, String lastName, String bio, String website, String postContent, String commentContent) {
+    public MainDTO(String postUsername, String postPicture, String profilePicture, String firstName, String lastName, String postContent, List<CommentEntity> commentEntityList) {
         this.postUsername = postUsername;
-        this.commentUsername = commentUsername;
         this.postPicture = postPicture;
         this.profilePicture = profilePicture;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.bio = bio;
-        this.website = website;
         this.postContent = postContent;
-        this.commentContent = commentContent;
+        this.commentEntityList=commentEntityList;
     }
 }

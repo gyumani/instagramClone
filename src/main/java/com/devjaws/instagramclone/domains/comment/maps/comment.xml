@@ -25,14 +25,20 @@
     <delete id="delete">
         delete from comment whrere id=#{id}
     </delete>
-    <select id="getListPost" resultType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity">
+    <select id="getListComment" resultType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity">
         select
-            id, post_id, username, content, createDate
+            p.id as id,
+            p.username as username,
+            p.content as content,
+            p.picture as picture,
+            c.username as commentUser,
+            c.content as commentContent
         from
-            comment
-        where
-            post_id=#{post_id}
-        order by
-            id desc
+            feed as p
+        join
+            comment as c
+        on
+            p.id=c.post_id
+        order by p.id desc
     </select>
 </mapper>

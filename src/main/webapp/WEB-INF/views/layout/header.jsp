@@ -40,18 +40,18 @@
     <div class="navigation__column">
         <ul class="navigations__links">
             <li class="navigation__list-item">
-                <a href="explore.html" class="navigation__link">
-                    <i class="fa fa-compass fa-lg"></i>
-                </a>
-            </li>
-            <li class="navigation__list-item">
-                <a href="/logout" class="navigation__link">
+                <a href="#" class="navigation__link">
                     <i class="fa fa-heart-o fa-lg"></i>
                 </a>
             </li>
             <li class="navigation__list-item">
                 <a href="/feed/profile/${principal.userEntity.username}" class="navigation__link">
                     <i class="fa fa-user-o fa-lg"></i>
+                </a>
+            </li>
+            <li class="navigation__list-item">
+                <a href="/logout" class="navigation__link">
+                    <i class="fas fa-sign-out fa-lg"></i>
                 </a>
             </li>
         </ul>

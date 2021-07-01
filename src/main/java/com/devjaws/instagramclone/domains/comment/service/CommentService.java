@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class CommentService {
     }
 
     @Transactional
-    public List<CommentEntity> getList(Integer id){
-        return commonDao.getList("Comment.getListPost", id);
+    public List<CommentEntity> getList(Model model){
+        return commonDao.getList("Comment.getListComment", model);
     }
 
     @Transactional

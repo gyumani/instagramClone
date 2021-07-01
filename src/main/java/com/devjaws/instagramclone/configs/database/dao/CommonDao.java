@@ -47,4 +47,9 @@ public class CommonDao implements ICommonDao{
     public int deleteData(String query, Object search) throws DataAccessException {
         return session.delete(query,search);
     }
+
+    @Override
+    public Integer getPostId(String query, Integer id) throws DataAccessException {
+        return session.selectOne(query,id);
+    }
 }
