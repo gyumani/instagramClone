@@ -28,9 +28,6 @@ public class UserEntity {
     private String picture;
     private String website;
     private LocalDate createDate; //가입일자(자동생성)
-    private List<FeedEntity> feedEntityList;
-    private List<CommentEntity> commentEntityList;
-    private List<FollowerEntity> followerEntityList;
 
     @Builder
     public UserEntity(String username, String password, String email, String firstName, String lastName, RoleType role, String bio, String picture, String website) {

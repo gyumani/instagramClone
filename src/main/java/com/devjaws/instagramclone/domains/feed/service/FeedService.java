@@ -1,6 +1,7 @@
 package com.devjaws.instagramclone.domains.feed.service;
 
 import com.devjaws.instagramclone.configs.database.dao.CommonDao;
+import com.devjaws.instagramclone.domains.feed.dtos.MainDTO;
 import com.devjaws.instagramclone.domains.feed.dtos.entities.FeedEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,8 @@ public class FeedService {
     }
 
     @Transactional
-    public List<FeedEntity> getpp (String username){
+    public List<MainDTO> getpp (String username){
         return commonDao.getList("Feed.getpp", username);
     }
+
 }

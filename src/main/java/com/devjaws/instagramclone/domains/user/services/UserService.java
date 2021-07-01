@@ -1,7 +1,6 @@
 package com.devjaws.instagramclone.domains.user.services;
 
-import com.devjaws.instagramclone.configs.database.dao.ICommonDao;
-import com.devjaws.instagramclone.domains.user.dao.UserDao;
+import com.devjaws.instagramclone.configs.database.dao.CommonDao;
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
 import com.devjaws.instagramclone.domains.user.role.RoleType;
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
@@ -23,10 +21,8 @@ import java.util.List;
 public class UserService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
-    private ICommonDao commonDao;
+    private CommonDao commonDao;
 
-    @Autowired(required = false)
-    private UserDao userDao;
 
     @Autowired
     private SqlSession sqlSession;
@@ -72,12 +68,5 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity searchUser(Integer id){
-        try{
-            userDao=sqlSession.getMapper(UserDao.class);
-            return userDao.selectProfile(id);
-        }catch(Exception e){
-            return null;
-        }
-    }
+    public UserEntity profile(String username){ return commonDao.getData("User.selectProfile", username);}
 }

@@ -115,8 +115,13 @@
   max-width: 936px;
   width: 100%;
 }
+.post_wrap{
+  width:80%; margin-left:25%;
+  display:flex;
+  justify-content: center;
+}
 
-.profile__photos .profile__photo {
+.profile__photo {
   width: 31%;
   margin-bottom: 35px;
   position: relative;

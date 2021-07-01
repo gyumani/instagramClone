@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" %><%--
   Created by IntelliJ IDEA.
   User: ${USER}
   Date: ${DATE}
@@ -9,16 +9,16 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<c:forEach items="${getpp}" var="getpp" varStatus="status" step="1" begin="0">
+
     <main id="profile">
         <header class="profile__header">
             <div class="profile__column">
-                <img  style="width:120px; height:120px;" src="/images/ProfilePicture/${getpp.postUsername}/${getpp.profilePicture}" />
+                <img style="width:120px; height:120px;" src="/images/ProfilePicture/${info.username}/${info.picture}" />
             </div>
             <div class="profile__column">
                 <div class="profile__title">
-                    <h3 class="profile__username"><c:out value="${getpp.postUsername}"></c:out> </h3>
-                    <c:if test="${getpp.postUsername==principal.userEntity.username}">
+                    <h3 class="profile__username">${info.username}</h3>
+                    <c:if test="${info.username==principal.userEntity.username}">
                         <a href="/feed/editProfile">Edit profile</a>
                         <a href="/updateUserForm">Edit user</a>
                     </c:if>
@@ -36,15 +36,14 @@
                 </ul>
                 <p class="profile__bio">
                     <span class="profile__full-name">
-                        ${getpp.firstName}&nbsp;${getpp.lastName}&nbsp;&nbsp;&nbsp;&nbsp;
+                        ${info.firstName}&nbsp;${info.lastName}&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
-                    <br/> <br/>${getpp.bio}<br/><br/>
-                    <a href="${getpp.website}">${getpp.website}</a>
+                    <br/> <br/>${info.bio}<br/><br/>
+                    <a href="${info.website}">${info.website}</a>
                 </p>
             </div>
 
         </header>
-
         <style>
             .post__upload{
                 width:15%; height: 30px;
@@ -54,25 +53,29 @@
                 text-decoration: none; background:#3897f0;
             }
         </style>
-        <c:if test="${getpp.postUsername== principal.userEntity.username}">
+        <c:if test="${info.username==principal.userEntity.username}">
             <a href="/feed/insertForm" class="post__upload">포스트 업로드</a>
         </c:if>
-
-        <section class="profile__photos">
-                <div class="profile__photo">
-                    <img src="/images/PostPicture/${getpp.postUsername}/${getpp.postPicture}" />
-                    <div class="profile__photo-overlay">
-                        <span class="overlay__item">
-                            <i class="fa fa-heart"></i>
-                            486
-                        </span>
-                        <span class="overlay__item">
-                            <i class="fa fa-comment"></i>
-                            344
-                        </span>
+        <div class="post_wrap">
+            <c:forEach items="${getpp}" var="getpp" varStatus="status" step="1" begin="0">
+                <section class="profile__photos">
+                    <div class="profile__photo">
+                        <img src="/images/PostPicture/${getpp.postUsername}/${getpp.postPicture}" />
+                        <div class="profile__photo-overlay">
+                                <span class="overlay__item">
+                                    <i class="fa fa-heart"></i>
+                                    486
+                                </span>
+                            <span class="overlay__item">
+                                    <i class="fa fa-comment"></i>
+                                    344
+                                </span>
+                        </div>
                     </div>
-                </div>
-        </section>
-    </main>
-</c:forEach>
+                </section>
+            </c:forEach>
+        </div>
+
+</main>
+
 <%@ include file="../layout/footer.jsp"%>

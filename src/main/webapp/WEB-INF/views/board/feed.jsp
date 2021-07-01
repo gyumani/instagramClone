@@ -72,7 +72,7 @@
                     <div class="photo__add-comment-container">
                         <input type="hidden" id="post_id" value="${main.id}">
                         <input type="hidden" id="username" value="${principal.username}">
-                        <textarea id="content" placeholder="Add a comment..."></textarea>
+                        <input type id="content" placeholder="Add a comment..."/>
                         <button id="btn-comment"><i class="fa fa-ellipsis-h"></i></button>
                     </div>
                 </div>

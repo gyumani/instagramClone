@@ -1,6 +1,8 @@
 package com.devjaws.instagramclone.domains.user.controllers;
 
 import com.devjaws.instagramclone.configs.database.dao.CommonDao;
+import com.devjaws.instagramclone.domains.feed.dtos.MainDTO;
+import com.devjaws.instagramclone.domains.feed.service.FeedService;
 import com.devjaws.instagramclone.domains.file.util.FileUploder;
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
 import com.devjaws.instagramclone.domains.user.services.UserService;
@@ -35,6 +37,9 @@ public class UserController {
 
     @Autowired
     private CommonDao commonDao;
+
+    @Autowired
+    private FeedService feedService;
 
 
     public boolean findById(String username) { return commonDao.getData("User.existUsername",username); }
@@ -85,15 +90,24 @@ public class UserController {
         return "board/profile";
     }
 
-    @GetMapping("/profile/{id}")
-    public String profile(){
-        return "board/profile";
-    }
 
     @GetMapping("/feed/editProfile")
     public String editProfile(){
         return "/board/editProfile";
     }
 
-
+    @ModelAttribute("getProfile")
+    public UserEntity getProfile(String username, Model model){
+        UserEntity profile=userService.profile(username);
+        model.addAttribute("profile",profile);
+        return profile;
+    }
+    @GetMapping("/feed/profile/{username}")
+    public String getpp (@PathVariable String username, Model model) throws Exception{
+        List<MainDTO> getpp= feedService.getpp(username);
+        model.addAttribute("getpp", getpp);
+        UserEntity info=userService.profile(username);
+        model.addAttribute("info",info);
+        return "board/profile";
+    }
 }

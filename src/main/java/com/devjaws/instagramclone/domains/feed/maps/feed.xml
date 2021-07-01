@@ -74,4 +74,5 @@
     <delete id="deletePost">
         DELETE * FROM feed WHERE id=#{id}
     </delete>
+    <resultMap id="" type=""
 </mapper>

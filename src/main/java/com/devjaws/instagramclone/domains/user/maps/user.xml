@@ -33,7 +33,7 @@
         DELETE FROM user WHERE id=#{id}
     </delete>
 
-    <select id="selectProfile" parameterType="Integer" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" >
+    <select id="selectProfile" parameterType="String" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" >
         SELECT
             id,
             username,
@@ -47,7 +47,7 @@
         FROM
             user
         WHERE
-            id=#{id}
+            username=#{username}
     </select>
     <update id="updateProfile" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
         UPDATE user SET bio=#{bio},picture=#{picture},website=#{website} WHERE id=#{id}
