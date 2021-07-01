@@ -108,14 +108,17 @@
   line-height: 125%;
 }
 
-#profile .profile__photos {
+#profile {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 936px;
   width: 100%;
 }
-
+.profile__photos{
+  display:grid;
+  grid: repeat(3, 60px) / auto-flow 100px;
+}
 .profile__photo {
   width: 31%;
   margin-bottom: 35px;

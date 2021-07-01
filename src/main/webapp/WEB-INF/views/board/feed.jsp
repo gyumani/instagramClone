@@ -25,15 +25,13 @@
                 url:"/comments/insert",
                 data:JSON.stringify(comment),
                 contentType:"application/json; charset=utf-8",
-                dataType:"json"
+                dataType:"text"
             }).done(function(resp){
                 if(resp.status===500){
-                    alert("댓글 실패");
-                    history.go(-1);
+                    location.href='/';
 
                 }else{
-                    alert("댓글 성공");
-                    history.go(-1);
+                    location.href='/';
                 }
             }).fail(function(error){
                 alert(JSON.stringify(error));
@@ -47,7 +45,6 @@
                     <div class="photo__user-info">
                         <a style="color:#333; text-decoration: none;" href="/feed/profile/${main.postUsername}"><span class="photo__author" >${main.postUsername}</span></a>
                     </div>
-                    <a class="btn-insert" href="/feed/updateForm/${main.id}"><i class="fa fa-ellipsis-h"></i></a>
                 </header>
                 <img style="width:300px; height:100%; margin-left:150px;" src="/images/PostPicture/${main.postUsername}/${main.postPicture}"/>
                 <div style="text-align: center; margin:10px 20px;">
@@ -64,12 +61,10 @@
                     </div>
                     <span class="photo__likes">45 likes</span>
                     <ul class="photo__comments">
-                        <c:forEach items="${comment}" var="comment">
-                            <c:if test="${main.id==comment.post_id}">
-                                <li class="photo__comment">
-                                    <span class="photo__comment-author">${comment.username}</span>${comment.content}
-                                </li>
-                            </c:if>
+                        <c:forEach items="${main.commentEntityList}" var="comment">
+                            <li class="photo__comment">
+                                <span style="margin-right:10px;" class="photo__comment-author">${comment.username}</span>${comment.content}
+                            </li>
                         </c:forEach>
                     </ul>
                     <span class="photo__time-ago">2 hours ago</span>

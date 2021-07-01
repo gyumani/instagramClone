@@ -44,11 +44,12 @@ public class FeedController {
     }
 
     @GetMapping({"/","/feed"})
-    public String feedList(Model model) throws Exception{
+    public String feedList(Model model,FeedEntity feedEntity) throws Exception{
         List<MainDTO> main= feedService.main(model);
-        List<CommentEntity> comment=commentService.getList(model);
+        main.forEach(feed->{
+            feed.setCommentEntityList(commentService.get(feed.getId()));
+        });
         model.addAttribute("main", main);
-        model.addAttribute("comment",comment);
 
         return "board/feed";
     }

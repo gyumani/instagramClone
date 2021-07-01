@@ -29,14 +29,10 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentEntity get(Integer id){
-        return commonDao.getData("Comment.readComment",id);
+    public List<CommentEntity> get(Integer id){
+        return commonDao.getList("Comment.readComment",id);
     }
 
-    @Transactional
-    public List<CommentEntity> getList(Model model){
-        return commonDao.getList("Comment.getListComment", model);
-    }
 
     @Transactional
     public int remove(Integer id){

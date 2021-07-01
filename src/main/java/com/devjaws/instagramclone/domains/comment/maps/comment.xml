@@ -20,7 +20,8 @@
         FROM
             comment
         WHERE
-            id=#{id}
+            post_id=#{post_id}
+        order by id desc
     </select>
     <delete id="delete">
         delete from comment whrere id=#{id}

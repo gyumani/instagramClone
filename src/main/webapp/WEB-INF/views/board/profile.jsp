@@ -93,7 +93,7 @@
                     </div>
                     <h3 class="modal_info_username">${post.postUsername}</h3>
                 </div>
-                <button><i class="fa fa-ellipsis-h"></i></button>
+                <a class="btn-insert" href="/feed/updateForm/${main.id}"><i class="fa fa-ellipsis-h"></i></a>
             </div>
             <div class="modal_info_content">
                 <p>${post.postContent}</p>

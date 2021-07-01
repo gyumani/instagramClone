@@ -14,11 +14,13 @@
 }
 
 .photo .photo__header {
+  display:flex;
+  justify-content: space-between;
   padding: 15px;
-  display: flex;
-  align-items: center;
 }
-
+.photo__header{
+  width:600px;
+}
 .photo__header .photo__avatar {
   width: 32px;
   border-radius: 50%;
@@ -86,7 +88,9 @@
   outline:none;
   border:none;
 }
-
+.btn-insert{
+  position:absolute; right:20px;
+}
 .photo__add-comment-container button i {
   cursor: pointer;
 }
