@@ -16,7 +16,7 @@
         </div>
         <h4 class="edit-profile__username">${principal.userEntity.username}</h4>
     </header>
-    <form action="/updateUserProc" method="post" class="edit-profile__form">
+    <form action="/user/updateUserProc" method="post" class="edit-profile__form">
         <input type="hidden" id="id" name="id" value="${principal.userEntity.id} "/>
         <div class="form__row">
             <label for="username" class="form__label">Username:</label>

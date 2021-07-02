@@ -7,25 +7,6 @@
     <select id="selectUser" resultType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
         SELECT * FROM user WHERE username=#{username}
     </select>
-    <insert id="insertUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user(
-            username,
-            password,
-            email,
-            firstName,
-            lastName,
-            role,
-            createDate
-        ) VALUES(
-            #{username},
-            #{password},
-            #{email},
-            #{firstName},
-            #{lastName},
-            #{role},
-            now()
-        )
-    </insert>
     <update id="updateUser" parameterType="com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity">
         UPDATE user SET username=#{username},password=#{password},email=#{email},firstName=#{firstName},lastName=#{lastName} WHERE id=#{id}
     </update>

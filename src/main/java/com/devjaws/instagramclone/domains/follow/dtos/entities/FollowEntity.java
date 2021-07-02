@@ -9,14 +9,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class FollowEntity {
+    private Integer id;
     private Integer userId;
-    private Integer followerId;
-    private Integer followingId;
+    private Integer followId;
 
     @Builder
-    public FollowEntity(Integer userId, Integer followerId, Integer followingId) {
+    public FollowEntity(Integer id, Integer userId, Integer followId) {
+        this.id = id;
         this.userId = userId;
-        this.followerId = followerId;
-        this.followingId = followingId;
+        this.followId = followId;
     }
 }

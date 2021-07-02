@@ -9,6 +9,10 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<div>
+    <input type="hidden" id="followId" value="${info.id}">
+    <input type="hidden" id="userId" value="${principal.userEntity.id}">
+</div>
 
     <main id="profile">
         <header class="profile__header">
@@ -18,10 +22,22 @@
             <div class="profile__column">
                 <div class="profile__title">
                     <h3 class="profile__username">${info.username}</h3>
-                    <c:if test="${info.username==principal.userEntity.username}">
-                        <a href="/feed/editProfile">Edit profile</a>
-                        <a href="/updateUserForm">Edit user</a>
-                    </c:if>
+                    <c:choose >
+                        <c:when test="${info.username==principal.userEntity.username}">
+                            <a href="/user/editProfile">Edit profile</a>
+                            <a href="/user/updateUserForm">Edit user</a>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${info.id==followData.followId}">
+                                    <button id="btn-follow" onclick="onUnFollow(this)" style="width:80px; height:30px; background:#3f99ed; border:0; outline:0; cursor:pointer; font-size:15px; color:#fff; border-radius: 4px;">unfollow</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button id="btn-follow" onclick="onFollow(this)" style="width:80px; height:30px; background:#3f99ed; border:0; outline:0; cursor:pointer; font-size:15px; color:#fff; border-radius: 4px;">follow</button>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <ul class="profile__stats">
                     <li class="profile__stat">
@@ -57,25 +73,25 @@
             <a href="/feed/insertForm" class="post__upload">포스트 업로드</a>
         </c:if>
         <section class="profile__photos">
-
-            <c:forEach items="${getpp}" var="getpp" varStatus="status" step="1" begin="0">
-                <div class="profile__photo" onclick="onPostid(this)">
-                    <input type="hidden" class="id" value="${getpp.id}"/>
-                    <input type="hidden" class="username" value="${getpp.postUsername}"/>
-                    <img src="/images/PostPicture/${getpp.postUsername}/${getpp.postPicture}" />
-                    <div class="profile__photo-overlay">
+            <div class="photo__wrapper">
+                <c:forEach items="${getpp}" var="getpp" varStatus="status" step="1" begin="0">
+                    <div class="profile__photo" onclick="onPostid(this)">
+                        <input type="hidden" class="id" value="${getpp.id}"/>
+                        <input type="hidden" class="username" value="${getpp.postUsername}"/>
+                        <img src="/images/PostPicture/${getpp.postUsername}/${getpp.postPicture}" />
+                        <div class="profile__photo-overlay">
                             <span class="overlay__item">
                                 <i class="fa fa-heart"></i>
                                 486
                             </span>
-                        <span class="overlay__item">
+                            <span class="overlay__item">
                                 <i class="fa fa-comment"></i>
                                 344
                             </span>
+                        </div>
                     </div>
-                </div>
-
-            </c:forEach>
+                </c:forEach>
+            </div>
         </section>
 
 </main>
@@ -126,35 +142,5 @@
 
 </div>
 
-<script>
-    $(document).ready(()=>{
-        $('.modal_close').on("click",()=>{
-            console.log('remove active');
-            $('.modal').removeClass('active');
-        });
-    });
-    function onPostid (obj){
-        const post=$(obj).next();
-        let id=post.find('.id').val();
-        let username=post.find('.username').val();
-        console.log(id);
-        console.log(username);
-
-        $.ajax({
-            type:"GET",
-            url:"/p/"+id,
-            dataType:"text"
-        }).done(function(resp){
-            if(resp.status===500){
-                alert("모달 띄우기 실패");
-            }else{
-                alert("모달 띄우기 성공");
-            }
-        }).fail(function(error){
-            alert(JSON.stringify(error));
-        });
-
-        $('.modal').addClass('active');
-    }
-</script>
+<script type="text/javascript" defer src="/js/profile.js"></script>
 <%@ include file="../layout/footer.jsp"%>

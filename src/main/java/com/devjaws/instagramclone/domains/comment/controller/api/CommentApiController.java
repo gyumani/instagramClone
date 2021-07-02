@@ -29,5 +29,10 @@ public class CommentApiController {
         commentService.insertComment(commentEntity);
     }
 
+    @DeleteMapping(value="/comment/delete/{id}")
+    public void delete(@PathVariable Integer id){
+        commentService.remove(id);
+    }
+
 
 }

@@ -21,13 +21,13 @@ public class CommentService {
     @Autowired
     private CommonDao commonDao;
 
-
+    // 댓글 달기
     @Transactional
     public void insertComment(CommentEntity commentEntity){
         logger.info("==============={}", new Gson().toJson(commentEntity));
         commonDao.insertData("Comment.insertComment",commentEntity);
     }
-
+    //댓글 보기
     @Transactional
     public List<CommentEntity> get(Integer id){
         return commonDao.getList("Comment.readComment",id);

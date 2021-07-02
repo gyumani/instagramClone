@@ -24,7 +24,7 @@
         order by id desc
     </select>
     <delete id="delete">
-        delete from comment whrere id=#{id}
+        delete from comment where id=#{id}
     </delete>
     <select id="getListComment" resultType="com.devjaws.instagramclone.domains.comment.dtos.entities.CommentEntity">
         select

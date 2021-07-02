@@ -16,27 +16,21 @@
         </div>
         <h4 class="edit-profile__username">${principal.userEntity.username}</h4>
     </header>
-    <form action="/feed/updateProc/${getURLParams(window.location.href)['id']}" METHOD="post" class="edit-profile__form" enctype="multipart/form-data">
+    <form action="/feed/updateProc/${post.id}" METHOD="post" class="edit-profile__form" enctype="multipart/form-data">
         <div class="form__row">
             <label for="file" class="form__label">Picture:</label>
             <input id="file" name="file" type="file" class="form__input" />
         </div>
         <div class="form__row">
             <label for="content" class="form__label">Content:</label>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="content" name="content">${post.postContent}</textarea>
         </div>
 
         <input type="submit" value="Submit">
     </form>
-    <a href="/feed/delete">remove</a>
+    <div style="margin-top:20px; margin-left:400px;"><a  style="text-decoration:none; color:#333;" href="/feed/delete">remove</a></div>
+
 </div>
-    <script>
-        function getURLParams(url){
-            let result={};
-            url.replace(/[?&]{1}([^=$#]+)=([^&#]*)/g,function (s,k,v){result[k]=decodeURIComponent(v);});
-            return result;
-        }
-    </script>
 </main>
 
 <%@ include file="../layout/footer.jsp"%>

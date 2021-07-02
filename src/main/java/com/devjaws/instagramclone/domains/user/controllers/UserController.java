@@ -4,9 +4,13 @@ import com.devjaws.instagramclone.configs.database.dao.CommonDao;
 import com.devjaws.instagramclone.domains.feed.dtos.MainDTO;
 import com.devjaws.instagramclone.domains.feed.service.FeedService;
 import com.devjaws.instagramclone.domains.file.util.FileUploder;
+import com.devjaws.instagramclone.domains.follow.dtos.entities.FollowEntity;
+import com.devjaws.instagramclone.domains.follow.service.FollowService;
 import com.devjaws.instagramclone.domains.user.dtos.entities.UserEntity;
 import com.devjaws.instagramclone.domains.user.services.UserService;
 import lombok.var;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +33,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
@@ -36,75 +41,69 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private CommonDao commonDao;
+    private FollowService followService;
 
     @Autowired
     private FeedService feedService;
 
+    //유저 기능 관련
 
-    public boolean findById(String username) { return commonDao.getData("User.existUsername",username); }
-
-    // 회원가입 페이지
-    @GetMapping("/auth/joinForm")
-    public String joinForm(){ return "user/joinForm"; }
-
-    @GetMapping("/auth/loginForm")
-    public String loginForm() {return "user/loginForm"; }
-
-
-    @PostMapping("/auth/joinProc")
-    public String join(UserEntity userEntity){
-        if(findById(userEntity.getUsername())==true){
-            return "user/loginForm";
-        }
-        userService.join(userEntity);
-        return "user/loginForm";
-    }
-
-    @GetMapping("/updateUserForm")
+    @GetMapping("/user/updateUserForm")
     public String updateForm() {return  "user/updateUserForm"; }
 
-    @PostMapping("/updateUserProc")
-    public String updateUser(UserEntity userEntity){
+    @PostMapping("/user/updateUserProc")
+    public RedirectView updateUser(UserEntity userEntity){
         userService.updateUser(userEntity);
-        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEntity.getUsername(),userEntity.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "/";
+
+//        Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEntity.getUsername(),userEntity.getPassword()));
+//        logger.info("=========>{}",authentication.getPrincipal().getClass().getName());
+
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return new RedirectView("/");
     }
 
-    @PostMapping("/deleteUser")
+    @PostMapping("/user/deleteUser")
     public String deleteUser(@RequestParam("id") Integer id, RedirectAttributes rttr){
         if(userService.deleteUser(id)){
             rttr.addFlashAttribute("result","success");
         }
-        return "/user/loginForm";
+        return "user/loginForm";
     }
 
 
-    @PostMapping("/Profile/insert")
+    //프로필 기능 관련
+
+    @PostMapping("/user/profile/insertProc")
     public String insertProfile(Principal principal, UserEntity userEntity, @RequestParam("file") MultipartFile file) throws Exception {
         String filetxt= StringUtils.cleanPath(file.getOriginalFilename());
         userEntity.setPicture(filetxt);
         userService.updateProfile(userEntity);
         FileUploder.uploadProfile(file, filetxt, principal.getName());
-        return "board/profile";
+        return "user/profile";
     }
 
 
-    @GetMapping("/feed/editProfile")
+    @GetMapping("/user/editProfile")
     public String editProfile(){
-        return "/board/editProfile";
+        return "/user/editProfile";
     }
 
 
-    @GetMapping("/feed/profile/{username}")
-    public String getpp (@PathVariable String username, Model model) throws Exception{
+    @GetMapping("/user/profile/{username}")
+    public String getpp (@PathVariable String username,Principal principal, Model model) throws Exception{
         List<MainDTO> getpp= feedService.getpp(username);
-        model.addAttribute("getpp", getpp);
         UserEntity info=userService.profile(username);
+        boolean followCheck=false;
+        if(followService.followData(principal.getName())){
+            followCheck=true;
+        }else{
+            followCheck=false;
+        }
+        model.addAttribute("getpp", getpp);
         model.addAttribute("info",info);
+        model.addAttribute("followcheck",followCheck);
 
-        return "board/profile";
+        return "user/profile";
     }
 
 

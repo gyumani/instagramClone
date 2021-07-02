@@ -16,12 +16,5 @@ public class FeedApiController {
     private FeedService feedService;
 
 
-    @PostMapping("/feed/updateProc/{id}")
-    public void updatePost(@PathVariable Integer id, FeedEntity feedEntity , @RequestParam("file") MultipartFile file) throws Exception{
-        Integer postid= feedService.getPostId(id);
-        String filetxt= StringUtils.cleanPath(file.getOriginalFilename());
-        feedEntity.setId(postid);
-        feedEntity.setPicture(filetxt);
-        feedService.updatePost(feedEntity, postid);
-    }
+
 }

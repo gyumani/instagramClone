@@ -35,8 +35,13 @@ public class FeedService {
     public MainDTO getPost (Integer id) {return commonDao.getData("Feed.selectPost", id); }
 
     @Transactional
-    public void updatePost(FeedEntity feedEntity, Integer id){commonDao.updateData("Feed.Post", feedEntity);}
+    public void updatePost(FeedEntity feedEntity){commonDao.updateData("Feed.updatePost", feedEntity);}
 
     @Transactional
     public Integer getPostId(Integer id) { return commonDao.getPostId("Feed.getPostId",id); }
+
+    @Transactional
+    public boolean deletePost(Integer id){
+        return commonDao.deleteData("Feed.deletePost", id)==1;
+    }
 }

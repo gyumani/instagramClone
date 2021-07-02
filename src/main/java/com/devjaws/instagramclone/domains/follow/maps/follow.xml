@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="Follow">
+    <!--  팔로우 기능  -->
+    <insert id="follow" parameterType="com.devjaws.instagramclone.domains.follow.dtos.entities.FollowEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO follow(
+            userId,
+            followId
+        ) VALUES (
+            #{userId},
+            #{followId}
+        );
+    </insert>
+    <select id="followData" parameterType="String" resultType="com.devjaws.instagramclone.domains.follow.dtos.entities.FollowEntity">
+        select
+            f.id as id,
+            f.userId as userId,
+            f.followId as followId
+        from
+            follow as f
+        join
+            user as u
+        on
+            f.userId=u.id
+        where
+            u.username=#{username};
+    </select>
+</mapper>

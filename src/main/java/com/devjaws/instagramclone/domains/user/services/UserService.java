@@ -23,23 +23,10 @@ public class UserService {
     @Autowired
     private CommonDao commonDao;
 
-
-    @Autowired
-    private SqlSession sqlSession;
-
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @Transactional
-    public void join(UserEntity userEntity) {
-        String rawPassword= userEntity.getPassword();
-        String encPassword=encoder.encode(rawPassword);
-        userEntity.setPassword(encPassword);
-        userEntity.setRole(RoleType.USER);
-        logger.info("====>{}", new Gson().toJson(userEntity));
-        insert(userEntity);
-    }
-
+    //유저 수정, 삭제 관련
     @Transactional
     public void updateUser(UserEntity userEntity){
         String rawPassword= userEntity.getPassword();
@@ -55,13 +42,12 @@ public class UserService {
         return commonDao.deleteData("User.deleteUser", id)==1;
     }
 
-    public void insert(UserEntity user) {
-        commonDao.insertData("User.insertUser", user);
-    }
+    @Transactional
     public void update(UserEntity user) {commonDao.updateData("User.updateUser", user);}
-    public boolean existUsername(String username){ return commonDao.getData("User.exisetUsername",username);}
 
 
+
+    //프로필 관련
     @Transactional
     public void updateProfile(UserEntity userEntity){
         commonDao.updateData("User.updateProfile", userEntity);

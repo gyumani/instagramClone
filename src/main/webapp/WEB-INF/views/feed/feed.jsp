@@ -9,42 +9,18 @@
 <%@ include file="../layout/header.jsp"%>
 <main id="feed">
 
-    <script type="text/javascript">
-        function onCommentInsert (obj){
-            const data=$(obj).prev();
-
-            let comment={
-                post_id: data.find('.post_id').val(),
-                username: $("#username").val(),
-                content: data.find('.content').val()
-
-            };
-            console.log(comment);
-            $.ajax({
-                type:"POST",
-                url:"/comments/insert",
-                data:JSON.stringify(comment),
-                contentType:"application/json; charset=utf-8",
-                dataType:"text"
-            }).done(function(resp){
-                if(resp.status===500){
-                    location.href='/';
-
-                }else{
-                    location.href='/';
-                }
-            }).fail(function(error){
-                alert(JSON.stringify(error));
-            });
-        }
-    </script>
         <c:forEach items="${main}" var="main">
             <div class="photo" >
-                <header class="photo__header">
+                <header style="position:relative;" class="photo__header">
                     <img  style="width:40px; height:40px; margin-right:10px;" src="/images/ProfilePicture/${main.postUsername}/${main.profilePicture}" />
                     <div class="photo__user-info">
-                        <a style="color:#333; text-decoration: none;" href="/feed/profile/${main.postUsername}"><span class="photo__author" >${main.postUsername}</span></a>
+                        <a style="color:#333; text-decoration: none;" href="/user/profile/${main.postUsername}"><span class="photo__author" >${main.postUsername}</span></a>
                     </div>
+                    <c:if test="${main.postUsername==principal.userEntity.username}">
+                        <div style="position:absolute; right:50px;">
+                            <a  style="text-decoration: none; color:#333;" href="/feed/updateForm/${main.id}"><i class="fa fa-ellipsis-h"></i></a>
+                        </div>
+                    </c:if>
                 </header>
                 <img style="width:300px; height:100%; margin-left:150px;" src="/images/PostPicture/${main.postUsername}/${main.postPicture}"/>
                 <div style="text-align: center; margin:10px 20px;">
@@ -62,8 +38,14 @@
                     <span class="photo__likes">45 likes</span>
                     <ul class="photo__comments">
                         <c:forEach items="${main.commentEntityList}" var="comment">
-                            <li class="photo__comment">
-                                <span style="margin-right:10px;" class="photo__comment-author">${comment.username}</span>${comment.content}
+                            <li style="display:flex;" class="photo__comment">
+                                <div>
+                                    <input type="hidden" class="commentId" value="${comment.id}" readonly>
+                                    <span style="margin-right:10px;" class="photo__comment-author">${comment.username}</span>${comment.content}
+                                </div>
+                                <c:if test="${comment.username==principal.userEntity.username}">
+                                    <button style="margin-left:50px; outline:0; border:0; background:none; color: #f00;cursor:pointer" onclick="onCommentDelete(this)">X</button>
+                                </c:if>
                             </li>
                         </c:forEach>
                     </ul>
@@ -79,5 +61,6 @@
                 </div>
             </div>
         </c:forEach>
+    <script type="text/javascript" src="/js/feed.js"></script>
 </main>
 <%@ include file="../layout/footer.jsp"%>
