@@ -11,7 +11,7 @@
             #{followId}
         );
     </insert>
-    <select id="followData" parameterType="String" resultType="com.devjaws.instagramclone.domains.follow.dtos.entities.FollowEntity">
+    <select id="followData" parameterType="String" resultType="boolean">
         select
             f.id as id,
             f.userId as userId,
@@ -23,6 +23,6 @@
         on
             f.userId=u.id
         where
-            u.username=#{username};
+            u.username=#{username}
     </select>
 </mapper>

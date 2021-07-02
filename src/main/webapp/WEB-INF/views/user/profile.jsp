@@ -28,14 +28,7 @@
                             <a href="/user/updateUserForm">Edit user</a>
                         </c:when>
                         <c:otherwise>
-                            <c:choose>
-                                <c:when test="${info.id==followData.followId}">
-                                    <button id="btn-follow" onclick="onUnFollow(this)" style="width:80px; height:30px; background:#3f99ed; border:0; outline:0; cursor:pointer; font-size:15px; color:#fff; border-radius: 4px;">unfollow</button>
-                                </c:when>
-                                <c:otherwise>
-                                    <button id="btn-follow" onclick="onFollow(this)" style="width:80px; height:30px; background:#3f99ed; border:0; outline:0; cursor:pointer; font-size:15px; color:#fff; border-radius: 4px;">follow</button>
-                                </c:otherwise>
-                            </c:choose>
+                            <button id="btn-follow" onclick="onFollow(this)" style="width:80px; height:30px; background:#3f99ed; border:0; outline:0; cursor:pointer; font-size:15px; color:#fff; border-radius: 4px;">follow</button>
                         </c:otherwise>
                     </c:choose>
                 </div>

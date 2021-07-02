@@ -93,15 +93,8 @@ public class UserController {
     public String getpp (@PathVariable String username,Principal principal, Model model) throws Exception{
         List<MainDTO> getpp= feedService.getpp(username);
         UserEntity info=userService.profile(username);
-        boolean followCheck=false;
-        if(followService.followData(principal.getName())){
-            followCheck=true;
-        }else{
-            followCheck=false;
-        }
         model.addAttribute("getpp", getpp);
         model.addAttribute("info",info);
-        model.addAttribute("followcheck",followCheck);
 
         return "user/profile";
     }

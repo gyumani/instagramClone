@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li class="navigation__list-item">
-                <a href="/user/profile" class="navigation__link">
+                <a href="/user/profile/${principal.userEntity.username}" class="navigation__link">
                     <i class="fa fa-user-o fa-lg"></i>
                 </a>
             </li>
