@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="User">
+    <select id="existUsername" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) FROM user WHERE username=#{username}
+    </select>
+    <select id="selectUser" resultType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity">
+        SELECT * FROM user WHERE username=#{username}
+    </select>
+    <insert id="insertUser" parameterType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(
+            username,
+            password,
+            email,
+            firstName,
+            lastName,
+            role,
+            createDate
+        ) VALUES(
+            #{username},
+            #{password},
+            #{email},
+            #{firstName},
+            #{lastName},
+            #{role},
+            now()
+        )
+    </insert>
+    <update id="updateUser" parameterType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity">
+        UPDATE user SET username=#{username},password=#{password},email=#{email},firstName=#{firstName},lastName=#{lastName} WHERE id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+
+    <select id="selectProfile" parameterType="String" resultType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity" >
+        SELECT
+            id,
+            username,
+            email,
+            picture,
+            bio,
+            website,
+            username,
+            firstName,
+            lastName
+        FROM
+            user
+        WHERE
+            username=#{username}
+    </select>
+    <update id="updateProfile" parameterType="kr.co.gyusta.module.domains.user.dtos.entities.UserEntity">
+        UPDATE user SET bio=#{bio},picture=#{picture},website=#{website} WHERE id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="Feed">
+    <select id="getPostId" parameterType="Integer" resultType="Integer">
+        select
+            id
+        from
+            post
+        where
+            id=#{id}
+    </select>
+    <insert id="insertFeed" parameterType="kr.co.gyusta.module.domains.feed.dtos.entities.FeedEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO feed(
+            username,
+            picture,
+            content,
+            createDate,
+            updateDate
+        ) VALUES(
+            #{username},
+            #{picture},
+            #{content},
+            now(),
+            now()
+        )
+    </insert>
+    <update id="updatePost" parameterType="kr.co.gyusta.module.domains.feed.dtos.entities.FeedEntity">
+        UPDATE feed SET picture=#{picture},content=#{content},updateDate=now() WHERE id=#{id}
+    </update>
+    <select id="selectPost" parameterType="Integer" resultType="kr.co.gyusta.module.domains.feed.dtos.MainDTO">
+        select
+            p.id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName
+        from
+            feed as p
+        left join
+            user as u
+        on
+            p.username=u.username
+        where
+            p.id=#{id}
+    </select>
+    <select id="getpp" parameterType="String" resultType="kr.co.gyusta.module.domains.feed.dtos.MainDTO">
+        select
+            p.id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName
+        from
+            feed as p
+        left join
+            user as u
+        on
+            p.username=u.username
+        where
+            p.username=#{username}
+        order by p.id desc
+    </select>
+    <select id="main" parameterType="kr.co.gyusta.module.domains.feed.dtos.MainDTO" resultType="kr.co.gyusta.module.domains.feed.dtos.MainDTO">
+        select
+            p.id as id,
+            p.username as postUsername,
+            p.picture as postPicture,
+            p.content as postContent,
+            u.picture as profilePicture,
+            u.firstName as firstName,
+            u.lastName as lastName
+        from
+            feed as p
+        join
+            user as u
+        on
+            p.username=u.username
+        order by p.id desc
+    </select>
+    <delete id="deletePost">
+        DELETE * FROM feed WHERE username=#{username}
+    </delete>
+</mapper>
